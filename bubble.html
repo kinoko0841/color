@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>CSS3 colorful bubble</title>
+		<style type="text/css">
+			* { margin:0; padding:0; overflow:hidden; background-color: #000;}
+			.circle-range{
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				animation:bubbleUp 5s infinite;
+			}
+			@keyframes bubbleUp{
+				99% {top:0;}
+				100% {opacity: 0;}
+			}
+			.circle{
+				position: absolute;
+				left:0;
+				right:0;
+				top:0;
+				bottom:0;
+				margin:auto;
+				background:none;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				border-radius: 100%;
+				/*background-color: blue;*/
+			}
+			.line {
+				width: 150px;
+				height: 1px;
+				color: #fff;
+				position:absolute;
+				left:0;
+				top:40px;
+			}
+		</style>
+		<script type="text/javascript">
+			(function(window){
+				var App=function(element,num){
+					this.num = num;	
+					this.element = element;
+					this.circles=[];
+					this.init();
+				}
+
+				App.prototype.randInt = function(n,m){
+					var rand = Math.floor(Math.random() * (m-n+1) )+ n;
+					return rand;
+				}
+
+				App.prototype.createCircle = function(){
+					var circle_range = document.createElement("div");
+					var circle = document.createElement("line");
+					circle_range.className = "circle-range";
+					circle.className = "circle";
+					circle_range.style.left = this.randInt(-20, 100) + "%";
+					circle_range.style.top = this.randInt(50, 100) + "%";
+					circle.style.background = "rgb(" + this.randInt(0,255)+","+this.randInt(0,255)+","+this.randInt(0,255)+")";
+					circle_range.style.opacity = this.randInt(2, 10) / 10;
+					circle_range.appendChild(circle);
+					//alert(circle_range.style);
+					return circle_range;
+				};
+
+				App.prototype.build = function(){
+					var i, k;
+					k = Math.ceil(this.num/3);
+					for(i=0; i<k; i++){
+						this.circles.push(this.createCircle());
+					}
+				};
+
+				App.prototype.run = function(){
+					var _this=this, i, k;
+					k = _this.circles.length;
+					for(i=0; i<k; i++){
+						(function(element, app){
+						 	window.setTimeout(function(){
+								app.element.appendChild(element); 
+							}, app.randInt(2000, 5000)); 
+						})(this.circles[i], this);
+					}
+				};				
+
+				App.prototype.init = function(){
+					this.build();
+					this.run();
+				}
+
+				window.App = App;
+
+			})(window);
+
+			window.onclick = function(){
+				new App(document.body, Math.floor(document.body.clientWidth / 7));
+				//alert(document.body.innerHTML);
+			};
+
+			window.onload = function(){
+				new App(document.body, Math.floor(document.body.clientWidth / 7));
+				//alert(document.body.innerHTML);
+			};
+
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

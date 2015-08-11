@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+		.blackboard{
+			height: 300px;
+			background-repeat: no-repeat;
+			background-image: url(../img/blackboard.jpg);
+			font-family: 'Indie Flower';
+			padding-top: 50px;
+			padding-left: 50px;
+			font-size: 50px;
+			color: #fff;
+		}
+		.emoji{		
+			margin-top: -200px;
+			margin-left: 100px;
+		}
+		.emoji img{
+			height: 50px;
+			width: 50px;
+		}
+		.chalk{
+			margin-top:130px;
+			margin-left: 200px;
+		}
+		.chalk button{
+			height: 50px;
+			border-radius: 10%;
+			box-shadow: 20%;
+			background-color: #000;
+			color: #fff;
+		}
+	</style>
+	<script type="text/javascript">
+		var str="welcome";
+		var x=0;
+		window.onload= function(){
+			drawWords(document.getElementById('blackboard'));
+			document.getElementById("emoji").onclick=function(){emojiFall()};
+		}
+
+		function drawWords(wrap){
+			if(x<7){
+				wrap.innerHTML+=str[x];
+			}
+			x=x+1;
+			setTimeout(function() {drawWords(document.getElementById('blackboard'))}, 1000);
+		}
+
+		function emojiFall(){
+
+		} 
+	</script>
+</head>
+<body>
+	<div class="blackboard" id="blackboard"></div>
+	<div class="emoji" id="emoji"><img src="../img/emoji/701.png"></div>
+	<div class="chalk">
+		<button>Use A Chalk</button>
+	</div>
+</body>

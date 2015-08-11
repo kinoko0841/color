@@ -1,0 +1,56 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<style type="text/css">
+			.circle{
+				position: relative;
+				height: 50px;
+				width: 50px;
+				border-radius: 50%;
+				background-color: red;
+			}
+			.circlefixed{
+				position: absolute;
+				height: 50px;
+				width: 50px;
+				border-radius: 50%;
+				background-color: red;
+			}
+		</style>
+		<script type="text/javascript">
+			function mousemove(event){
+				var x=event.clientX;
+				var y=event.clientY;
+				circle=document.getElementById('circle');
+				// window.alert(x,y);
+				circle.style.left=x;
+				circle.style.top=y;
+			}
+
+			function clickmouse(event){
+				var mycurrent_circle=document.createElement("div");
+				mycurrent_circle.className="circlefixed";
+				var x=event.clientX;
+				var y=event.clientY;
+				mycurrent_circle.style.left=x+7.5;
+				mycurrent_circle.style.top=y+7.5;
+				document.body.appendChild(mycurrent_circle);
+				console.log(x);
+			}
+
+			window.onmousemove=function(){
+				mousemove(event);
+			}
+
+			window.onmousedown=function(){
+				console.log("click");
+				clickmouse(event);
+			}
+
+		</script>
+	</head>
+	<body>
+		<div class="circle" id="circle"></div>
+		<canvas class="draw"></canvas>
+	</body>
+</html>
